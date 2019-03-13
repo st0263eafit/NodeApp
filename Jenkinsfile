@@ -30,4 +30,8 @@ node {
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
+
+    stage('run app') {
+        sh './deploy.sh'
+    }
 }
