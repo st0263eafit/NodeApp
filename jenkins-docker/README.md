@@ -1,0 +1,2 @@
+$ sudo docker build . -t emontoya/myjenkins
+$ sudo docker run -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home emontoya/myjenkins
