@@ -32,6 +32,6 @@ node {
     }
 
     stage('run app') {
-        sh './deploy.sh'
+        sh 'bash ./deploy.sh'
     }
 }
