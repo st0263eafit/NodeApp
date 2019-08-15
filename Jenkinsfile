@@ -1,36 +1,41 @@
-node {
-    def app
-
-    stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
-        checkout scm
+pipeline {
+  agent any
+  stages {
+    stage('Cloning Repo') {
+      steps {
+        sh '''echo "pulling latest changes..."
+        git pull'''
+      }
     }
-
     stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
+      steps {
+        script {
+          app = docker.build("emonto15/nodeapp")
+        }
 
-        app = docker.build("emontoya/nodeapp")
+      }
     }
-
     stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-
-        app.inside {
-            sh 'echo "Tests passed"'
+      steps {
+        script {
+          app.inside {
+            echo "Tests passed"
+          }
         }
-    }
 
-    stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
+      }
+    }
+    stage('Push Image') {
+      steps {
+        sh 'echo "Pushing..."'
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("latest")
+          }
+          echo "Trying to Push Docker Build to DockerHub"
         }
+
+      }
     }
+  }
 }
