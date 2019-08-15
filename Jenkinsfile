@@ -1,37 +1,41 @@
-node {
-    def app
-
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-
-        checkout scm
+pipeline {
+  agent any
+  stages {
+    stage('Cloning Repo') {
+      steps {
+        sh '''echo "pulling latest changes..."
+        git pull'''
+      }
     }
-
     stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("emontoya/nodeapp")
-    }
-
-    stage('Test image') {
-        
-        app.inside {
-            echo "Tests passed"
+      steps {
+        script {
+          app = docker.build("emonto15/nodeapp")
         }
-    }
 
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("${env.BUILD_NUMBER}")
+      }
+    }
+    stage('Test image') {
+      steps {
+        script {
+          app.inside {
+            echo "Tests passed"
+          }
+        }
+
+      }
+    }
+    stage('Push Image') {
+      steps {
+        sh 'echo "Pushing..."'
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
-    }
+          }
+          echo "Trying to Push Docker Build to DockerHub"
+        }
 
-    stage('run app') {
-        sh 'bash ./deploy.sh'
+      }
     }
+  }
 }
