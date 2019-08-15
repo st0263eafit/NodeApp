@@ -1,13 +1,45 @@
 # NodeApp
 
-# 1. Descargar y ejecutar la AppWeb Manualmente.
+## 0. crear una máquina virtual en AWS educate
+
+Aprovisionar 'manualmente' una VM en EC2 en Amazon
+    2.1 ver video: https://drive.google.com/file/d/1ITGHTak0gdUv3m1izGxQM0eNpNmvvNuU/view?usp=sharing 
+    2.2 abra los puertos 80 (http),  8080 (jenkins), 22 (ssh), 443 (https)
+    2.3 asigne una IP estática
+    2.4 solicite un dominio para esta IP (dot.tk)
+
+## 1. Instalar Docker
+
+### En AWS Amazon Linux - programa AWS Educate
+
+      # imagen: Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-0080e4c5bc078760e
+      # imagen: Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-035be7bafff33b6b6 (64-bit x86) / ami-0217d483951e4cec3 (64-bit Arm)
+      # guia: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
+
+      $ sudo yum update -y
+
+      # para Amazon Linux AMI
+      $ sudo yum install docker
+
+      # para Amazon Linux 2 AMI
+      $ sudo amazon-linux-extras install docker
+      $ sudo yum install git
+
+      $ sudo systemctl enable docker
+      $ sudo systemctl start docker
+      $ sudo usermod -a -G docker ec2-user
+
+      instalar docker-compose: https://docs.docker.com/compose/install/
+
+      $ sudo curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+      $ sudo chmod +x /usr/local/bin/docker-compose
+
+      $ sudo reboot
+
+## 3. Descargar y ejecutar la AppWeb Manualmente.
 
 1. AppWeb nodejs de prueba
-2. Aprovisionar 'manualmente' una VM en EC2 en Amazon
-    2.1 ver video: https://drive.google.com/file/d/1ITGHTak0gdUv3m1izGxQM0eNpNmvvNuU/view?usp=sharing 
-    2.2 abra los puertos 80 (appweb),  8080 (jenkins), 22 (ssh)
-    2.3 deseable: asigne una IP fija
-    2.4 opcional: solicite un dominio para esta IP
+
 3. Entrar al Servidor, descargar la imagen docker de la appweb o crearla/publicarla la primera vez:
 
     3.1 Primera vez:
