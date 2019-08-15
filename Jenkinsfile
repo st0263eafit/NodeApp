@@ -29,7 +29,7 @@ pipeline {
       steps {
         sh 'echo "Pushing..."'
         script {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("latest")
           }
           echo "Trying to Push Docker Build to DockerHub"
