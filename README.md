@@ -73,5 +73,10 @@
 
 referencias:
 
-* https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline
-
+* https://dzone.com/articles/adding-agithub-webhook-in-your-jenkins-pipeline
+* https://github.com/papaludwig/docker-tutorials/tree/master/jenkins
+* https://medium.com/@schogini/running-docker-inside-and-outside-of-a-jenkins-container-along-with-docker-compose-a-tiny-c908c21557aa
+* https://www.youtube.com/watch?v=iMPUUROWI84
+* https://github.com/Buffer0x7cd/jenkins-docker/
+* https://medium.com/@manav503/how-to-build-docker-images-inside-a-jenkins-container-d59944102f30
+* https://container-solutions.com/running-docker-in-jenkins-in-docker/
