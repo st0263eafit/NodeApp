@@ -10,7 +10,7 @@ pipeline {
     stage('Build image') {
       steps {
         script {
-          def app = docker.build("emontoya/nodeapp")
+          app = docker.build("emontoya/nodeapp")
         }
 
       }
