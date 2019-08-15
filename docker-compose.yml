@@ -1,0 +1,9 @@
+version: "2"
+services:
+  mynodeapp:
+    image: emontoya/nodeapp
+    user: root
+    ports:
+      - "80:8000"
+    volumes:
+      - /usr/local/bin:/usr/local/bin
