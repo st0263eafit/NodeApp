@@ -37,5 +37,11 @@ pipeline {
 
       }
     }
+    stage('Deploy Container') {
+      steps {
+        sh '''echo "Deploying..."
+bash ./deploy.sh'''
+      }
+    }
   }
 }
