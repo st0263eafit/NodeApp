@@ -6,4 +6,4 @@ services:
     ports:
       - "80:8000"
     volumes:
-      - /usr/local/bin:/usr/local/bin
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
